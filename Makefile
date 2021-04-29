@@ -1,5 +1,5 @@
 .PHONY: all clean
-TARGETNAME=api
+TARGETNAME=ui-api
 GOOS=linux
 GOARCH=amd64
 
