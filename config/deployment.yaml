@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: api:latest
+        imagePullPolicy: Always
+        env:
+        - name: MONGODB_HOST
+          value: "mongodb.l6p.svc.cluster.local:27017"
+        - name: MONGODB_USER
+          value: "root"
+        - name: MONGODB_PASS
+          value: "rootpassword"
+        ports:
+        - name: http
+          containerPort: 1323
+          protocol: TCP
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          httpGet:
+            path: /api/v1/ping
+            port: http
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          httpGet:
+            path: /api/v1/ping
+            port: http
+        resources:
+          requests:
+            cpu: 0.5
+            memory: 512Mi
+      serviceAccountName: api
+      terminationGracePeriodSeconds: 10
