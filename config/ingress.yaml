@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ui-api
+spec:
+  rules:
+  - host: local.l6p.io
+    http:
+      paths:
+      - path: "/api/v1"
+        pathType: Prefix
+        backend:
+          service:
+            name: ui-api
+            port:
+              number: 80

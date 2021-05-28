@@ -2,22 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
-  labels:
-    app: api
+  name: ui-api
 spec:
-  selector:
-    matchLabels:
-      app: api
   replicas: 1
   template:
-    metadata:
-      labels:
-        app: api
     spec:
       containers:
-      - name: api
-        image: api:latest
+      - name: ui-api
+        image: img:latest
         imagePullPolicy: Always
         env:
         - name: MONGODB_HOST
@@ -46,5 +38,5 @@ spec:
           requests:
             cpu: 0.5
             memory: 512Mi
-      serviceAccountName: api
+      serviceAccountName: ui-api
       terminationGracePeriodSeconds: 10

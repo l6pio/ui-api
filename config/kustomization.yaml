@@ -9,16 +9,17 @@ namespace: default
 namePrefix: l6p-
 
 # Labels to add to all resources and selectors.
-#commonLabels:
-#  someName: someValue
+commonLabels:
+  l6p-app: ui-api
 
 resources:
 - deployment.yaml
 - service.yaml
 - service_account.yaml
+- ingress.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- name: api
-  newName: localhost:32000/api
+- name: img
+  newName: localhost:32000/ui-api
   newTag: latest

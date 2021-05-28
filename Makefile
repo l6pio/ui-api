@@ -1,6 +1,6 @@
 
 # Image URL to use all building/pushing image targets
-IMG ?= api:latest
+IMG ?= img:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -44,7 +44,7 @@ docker-push: ## Push docker image with the manager.
 ##@ Deployment
 
 deploy: kustomize ## Deploy controller to the K8s cluster specified in ~/.kube/config.
-	cd config && $(KUSTOMIZE) edit set image api=${IMG}
+	cd config && $(KUSTOMIZE) edit set image img=${IMG}
 	$(KUSTOMIZE) build config | kubectl apply -f -
 
 undeploy: ## Undeploy controller from the K8s cluster specified in ~/.kube/config.
