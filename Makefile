@@ -1,4 +1,3 @@
-
 # Image URL to use all building/pushing image targets
 IMG ?= img:latest
 
@@ -35,10 +34,10 @@ help: ## Display this help.
 
 ##@ Build
 
-docker-build: ## Build docker image with the manager.
+docker-build:
 	docker build -f $(shell pwd)/docker/Dockerfile -t ${IMG} .
 
-docker-push: ## Push docker image with the manager.
+docker-push:
 	docker push ${IMG}
 
 ##@ Deployment
